@@ -9,6 +9,7 @@ class CheckingRodState(BotState):
     def handle(self, screen):
         self.bot.log("[CHECKING_ROD] Checking rod...")
 
+
         time.sleep(1)
 
         if self.detector.find(screen, "broken_rod"):
@@ -18,10 +19,11 @@ class CheckingRodState(BotState):
 
             self.controller.press_key('m')
             time.sleep(1)
+            pos = self.detector.find(screen, "new_rod")
 
-            self.controller.move_to(1650, 580)
+            self.controller.move_to(pos[0], pos[1])
             time.sleep(0.5)
-            self.controller.move_to(1650, 580)
+            self.controller.move_to(pos[0], pos[1])
             time.sleep(0.5)
             self.controller.click('left')
             time.sleep(1)
