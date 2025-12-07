@@ -18,16 +18,13 @@ class CheckingRodState(BotState):
 
             # Open inventory
             self.controller.press_key('m')
-            time.sleep(1.5)  # Wait for inventory to open
-            
-            # Capture a fresh screen after opening inventory
-            screen = self.detector.capture_screen()
+            time.sleep(1)
             
             # Find the new_rod template
-            pos = self.detector.find(screen, "new_rod", debug=self.bot.debug_mode)
+            pos = self.detector.find(screen, "new_rod")
             
             if pos is None:
-                self.bot.log("[CHECKING_ROD] ❌ Could not find new_rod template!")
+                self.bot.log("[CHECKING_ROD] ❌ Could not find new rod!")
                 return StateType.CHECKING_ROD  # Stay in this state to retry
             
             self.bot.log(f"[CHECKING_ROD] ✅ Found new_rod at {pos}")
